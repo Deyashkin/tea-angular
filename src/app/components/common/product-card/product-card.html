@@ -1,0 +1,24 @@
+<div class="col">
+  <div class="card wow animate__flipInX">
+    <a
+      href="{{product.image}}"
+      class="image-link"
+    >
+      <img
+        src="{{product.image}}"
+        class="card-img-top"
+        alt="{{product.title}}"
+      >
+    </a>
+    <div class="card-body">
+      <h5 class="card-title">{{ product.title }}</h5>
+      <p class="card-text line-clamp-3">{{ product.description }}</p>
+      <a
+        [routerLink]="['/product', product.id]"
+        class="btn btn-primary hvr-grow"
+      >Подробнее
+      </a>
+    </div>
+  </div>
+</div>
+

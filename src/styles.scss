@@ -1,2 +1,121 @@
 /* You can add global styles to this file, and also import other style files */
-@use "bootstrap/scss/bootstrap";
+/* You can add global styles to this file, and also import other style files */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+}
+
+.slick-slide{
+  background-color: white;
+  overflow: hidden;
+  height: 640px;
+}
+
+.slick-prev, .slick-next {
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #076BFF;
+  border-radius: 50%;
+  line-height: 1;
+}
+
+.slick-prev:before, .slick-next:before {
+  content: '';
+}
+
+svg {
+  vertical-align: baseline;
+}
+
+.slick-prev {
+  left: 13px;
+}
+
+.slick-next {
+  right: 13px;
+}
+
+.rotate-105 {
+  transform: rotate(15deg);
+}
+
+.bg-warning {
+  background: #EFD585 !important;
+}
+
+.accordion-button::after, .accordion-button:not(.collapsed)::after {
+  background-image: url("/accordion-open-arrow.svg");
+}
+
+.ui-icon {
+  position: absolute;
+  right: 25px;
+  top: 30px;
+  width: 20px;
+  height: 20px;
+  background-image: url(/accordion-open-arrow.svg);
+}
+
+.ui-state-active .ui-icon {
+  top: 25px;
+  rotate: -180deg;
+}
+
+
+
+.ui-state-active .ui-icon, .ui-state-hover .ui-icon, .ui-state-focus .ui-icon {
+  transition: all 0.3s ease;
+  background-image: url(/accordion-open-arrow.svg);
+}
+
+.ui-icon-circle-arrow-e, .ui-icon-circle-arrow-s {
+  background-position: 0 0;
+}
+
+.white-popup {
+  position: relative;
+  background: #FFF;
+  padding: 20px;
+  width: auto;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+.mfp-with-zoom .mfp-container,
+.mfp-with-zoom.mfp-bg {
+  opacity: 0;
+  -webkit-backface-visibility: hidden;
+  /* ideally, transition speed should match zoom duration */
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+
+.mfp-with-zoom.mfp-ready .mfp-container {
+  opacity: 1;
+}
+.mfp-with-zoom.mfp-ready.mfp-bg {
+  opacity: 0.8;
+}
+
+.mfp-with-zoom.mfp-removing .mfp-container,
+.mfp-with-zoom.mfp-removing.mfp-bg {
+  opacity: 0;
+}
+
+
+
+
+
+
+
+
+
+
+

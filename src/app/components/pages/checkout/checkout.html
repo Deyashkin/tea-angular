@@ -1,0 +1,219 @@
+<div class="col-lg-7 mx-auto mb-5">
+  <div class="order-form">
+    <div class="h2 text-center my-5">Сделать заказ</div>
+
+    @if (!success) {
+      <form
+        [formGroup]="orderForm"
+        (ngSubmit)="submit()"
+        class="row g-3 wow animate__bounceInRight"
+        novalidate
+      >
+        <div class="col-md-4">
+          <label
+            for="name"
+            class="form-label"
+          >Имя
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="name"
+            id="name"
+            name="name"
+            aria-label="First name"
+            [class.is-invalid]="orderForm.get('name')?.invalid && (orderForm.get('name')?.touched || orderForm.get('name')?.dirty)"
+            required
+          >
+
+          @if (orderForm.get('name')?.errors && (orderForm.get('name')?.touched || orderForm.get('name')?.dirty)) {
+            <div class="invalid-feedback d-block">
+              Только буквы
+            </div>
+          }
+
+        </div>
+        <div class="col-md-4">
+          <label
+            for="surname"
+            class="form-label"
+          >Фамилия
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="surname"
+            id="surname"
+            name="surname"
+            aria-label="surname"
+            [class.is-invalid]="orderForm.get('surname')?.invalid && (orderForm.get('surname')?.touched || orderForm.get('surname')?.dirty)"
+            required
+          >
+
+          @if (orderForm.get('surname')?.errors && (orderForm.get('surname')?.touched || orderForm.get('surname')?.dirty)) {
+            <div class="invalid-feedback d-block">
+              Только буквы
+            </div>
+          }
+
+        </div>
+        <div class="col-md-4">
+          <label
+            for="phone"
+            class="form-label"
+          >Телефон
+          </label>
+          <input
+            type="tel"
+            class="form-control"
+            formControlName="phone"
+            id="phone"
+            name="phone"
+            aria-label="phone"
+            maxlength="12"
+            [class.is-invalid]="f.phone.invalid && (f.phone.dirty || f.phone.touched)"
+            required
+          >
+
+          @if (f.phone.errors && (f.phone.dirty || f.phone.touched)) {
+            <div class="invalid-feedback d-block">
+              @if (f.phone.errors['required']) {
+                Заполните телефон.
+              } @else if (f.phone.errors['phoneChars']) {
+                Только цифры и, при необходимости, знак «+» в начале.
+              } @else if (f.phone.errors['phoneLen']) {
+                Номер должен содержать ровно 11 цифр.
+              }
+            </div>
+          }
+
+        </div>
+        <div class="col-md-6">
+          <label
+            for="country"
+            class="form-label"
+          >Страна
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            id="country"
+            formControlName="country"
+            name="country"
+            aria-label="country"
+            required
+          >
+        </div>
+        <div class="col-md-6">
+          <label for="zip" class="form-label">Индекс</label>
+          <input
+            type="text"
+            class="form-control"
+            id="zip"
+            formControlName="zip"
+            name="zip"
+            aria-label="zip"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            maxlength="6"
+            [class.is-invalid]="f.zip.invalid && (f.zip.dirty || f.zip.touched)"
+            required
+          >
+
+          @if (f.zip.errors && (f.zip.dirty || f.zip.touched)) {
+            <div class="invalid-feedback d-block">
+              @if (f.zip.errors['required']) {
+                Заполните индекс.
+              } @else if (f.zip.errors['pattern']) {
+                Должно быть ровно 6 цифр.
+              }
+            </div>
+          }
+        </div>
+        <div class="col-12">
+          <label
+            for="address"
+            class="form-label"
+          >Адрес
+          </label>
+          <input
+            type="text"
+            class="form-control mb-3"
+            formControlName="address"
+            id="address"
+            name="address"
+            aria-label="address"
+            [class.is-invalid]="f.address.invalid && isShown(f.address)"
+            required
+          >
+
+          @if (f.address.errors && isShown(f.address)) {
+            <div class="invalid-feedback d-block">
+              Разрешены только буквы, цифры, пробел, «-» и «/».
+            </div>
+          }
+
+        </div>
+
+        <div class="col-12">
+          <label
+            for="product"
+            class="form-label"
+          >Товар
+          </label>
+          <input
+            type="text"
+            class="form-control bg-body-secondary text-body-secondary"
+            id="product"
+            name="product"
+            formControlName="product"
+          >
+          <div class="form-text">Выбранный товар нельзя изменить</div>
+        </div>
+
+        <div class="col-12">
+          <label
+            for="comment"
+            class="form-label"
+          >Комментарий к заказу
+          </label>
+          <textarea
+            class="form-control"
+            id="comment"
+            name="comment"
+            rows="4"
+            formControlName="comment"
+            placeholder="Ваши пожелания к заказу, особые указания по доставке и т.д."
+          ></textarea>
+        </div>
+
+        <div class="col-12">
+          <button
+            type="submit"
+            class="btn btn-primary px-5 hvr-grow"
+            id="form-button"
+            [disabled]="orderForm.invalid || sending"
+          > @if (sending) {
+            Отправка...
+          } @else {
+            Отправить
+          }
+          </button>
+        </div>
+      </form>
+    } @else {
+      <div class="text-center my-5">
+        <h3 class="fs-3 my-5 p-5 rounded-4 bg-success text-light">
+          Спасибо за заказ. Мы свяжемся с вами в ближайшее время!
+        </h3>
+        <a
+          routerLink="/shop"
+          class="btn btn-outline-primary"
+        >Вернуться в каталог
+        </a>
+      </div>
+    }
+
+  </div>
+
+</div>
