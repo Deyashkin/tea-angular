@@ -54,7 +54,6 @@ export class Checkout implements OnInit {
 
   selectedProduct: string = '';
 
-
   constructor(private router: Router) {
     const navigation = this.router.getCurrentNavigation();
     if (navigation?.extras.state) {
@@ -77,16 +76,14 @@ export class Checkout implements OnInit {
     this.success = false;
     this.error = false;
 
-    // disabled-контролы (product) берём через getRawValue
     const v = this.orderForm.getRawValue();
 
-    // Маппинг под требования API:
     const body = {
       name: v.name ?? '',
-      last_name: v.surname ?? '',   // ← surname → last_name
+      last_name: v.surname ?? '',
       phone: v.phone ?? '',
       country: v.country ?? '',
-      zip: v.zip ?? '',             // ← именно zip
+      zip: v.zip ?? '',
       product: v.product ?? '',
       address: v.address ?? '',
       comment: v.comment ?? ''
@@ -96,9 +93,9 @@ export class Checkout implements OnInit {
       next: (res) => {
         this.sending = false;
         if (res?.success === 1) {
-          this.success = true;              // скрываем форму, показываем «спасибо»
+          this.success = true;
         } else {
-          this.error = true;                // показать ошибку на 3 секунды (по желанию ТЗ)
+          this.error = true;
           setTimeout(() => (this.error = false), 3000);
         }
       },
