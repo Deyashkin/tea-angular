@@ -1,131 +1,180 @@
 <div class="container">
 
-  <div class="slick-slider position-relative pb-5 wow animate__bounceInUp">
-    <div class="position-relative">
-      <img
-        class="position-absolute img-fluid h-100 object-fit-cover"
-        src="/slider-image-1.png"
-        alt=""
-      >
-      <div class="row h-100 align-items-center ps-5">
-        <div class="col-7 ms-5 z-1">
-          <div class="fs-2 fw-bold mb-5">Скидки на травянные чаи</div>
-          <div class="mb-5">Узнай все подробности, заполнив заявку</div>
-          <button
-            type="button"
-            class="btn btn-primary px-5 hvr-grow"
-          >Заполнить
-          </button>
-        </div>
-        <div class="col"></div>
-      </div>
-    </div>
-
-    <div class="position-relative">
-      <img
-        class="position-absolute img-fluid h-100 object-fit-cover"
-        src="/slider-image-2_2.png"
-        alt=""
-      >
-      <div class="row h-100 align-items-center ps-5">
-        <div class="col-7 ms-5 z-1">
-          <div class="fs-2 fw-bold mb-5">Закажи три пачки чая
-            <br> и получи подарок
+  <div class="carousel-container pb-5 wow animate__bounceInUp">
+    <div class="carousel">
+      @for (slide of slides; track slide.img; let i = $index) {
+        <div class="carousel-slide" [class.active]="i === currentSlide">
+          <img
+            [src]="slide.img"
+            [alt]="slide.alt"
+            class="img-fluid carousel-image"
+          >
+          <div class="position-absolute top-0 start-0 w-100 h-100">
+            <div class="row h-100 align-items-center ps-5">
+              <div [class]="slide.colClass + ' ms-5 z-1'">
+                <div class="fs-2 fw-bold mb-5" [innerHTML]="slide.title"></div>
+                @if (slide.description) {
+                  <div class="mb-5">{{ slide.description }}</div>
+                }
+                <button
+                  type="button"
+                  class="btn btn-primary px-5 hvr-grow"
+                >{{ slide.buttonText }}
+                </button>
+              </div>
+              <div class="col"></div>
+            </div>
           </div>
-          <button
-            type="button"
-            class="btn btn-primary px-5 hvr-grow"
-          >Заполнить
-          </button>
         </div>
-        <div class="col"></div>
-      </div>
+      }
     </div>
 
-    <div class="position-relative">
-      <img
-        class="position-absolute img-fluid h-100 object-fit-cover"
-        src="/slider-image-3.png"
-        alt=""
-      >
-      <div class="row h-100 align-items-center ps-5">
-        <div class="col-5 ms-5 z-1">
-          <div class="fs-2 fw-bold mb-5">Попробуй нашу новинку — ягодный чай</div>
-          <button
-            type="button"
-            class="btn btn-primary px-5 hvr-grow"
-          >Заказать
-          </button>
-        </div>
-        <div class="col"></div>
-      </div>
+    <!-- Кнопки навигации -->
+    <button class="carousel-control prev" (click)="prevSlide()">
+      <svg width="20px" height="20px" viewBox="0 0 25 20" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5.32935 9.47742L13.7908 0.176819C13.9865 -0.0384587 14.2551 -0.164517 14.547 -0.178062C14.8389 -0.191607 15.1179 -0.0909537 15.3323 0.105292L16.0152 0.729469C16.4596 1.13622 16.4912 1.82934 16.0858 2.27487L8.98048 10.085L16.7758 17.212C16.9903 17.4082 17.116 17.6772 17.1294 17.9697C17.1427 18.2625 17.042 18.5421 16.8463 18.7575L16.2232 19.4421C16.0273 19.6574 15.7589 19.7835 15.467 19.797C15.1751 19.8106 14.8961 19.7099 14.6817 19.5137L5.40013 11.0282C5.18513 10.8313 5.05964 10.561 5.04692 10.268C5.03285 9.97387 5.13319 9.6932 5.32935 9.47742Z" fill="#595555"/>
+      </svg>
+    </button>
+
+    <button class="carousel-control next" (click)="nextSlide()">
+      <svg width="20px" height="20px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16.5103 10.5226L8.04881 19.8232C7.85312 20.0385 7.58452 20.1645 7.2926 20.1781C7.00068 20.1916 6.72174 20.091 6.50726 19.8947L5.82438 19.2705C5.38 18.8638 5.34837 18.1707 5.75385 17.7251L12.8591 9.91505L5.0638 2.78805C4.84932 2.5918 4.72357 2.32276 4.71022 2.03028C4.69685 1.73747 4.79757 1.45792 4.99326 1.24248L5.6164 0.557867C5.81225 0.342583 6.08069 0.216532 6.37261 0.202987C6.66452 0.189442 6.94347 0.290095 7.15795 0.48634L16.4395 8.97182C16.6545 9.16869 16.78 9.43905 16.7927 9.73205C16.8068 10.0261 16.7064 10.3068 16.5103 10.5226Z" fill="#595555"/>
+      </svg>
+    </button>
+
+    <!-- Индикаторы -->
+    <div class="carousel-indicators">
+      @for (slide of slides; track slide.img; let i = $index) {
+        <button
+          class="carousel-indicator"
+          [class.active]="i === currentSlide"
+          (click)="goToSlide(i)"
+        ></button>
+      }
     </div>
   </div>
 
   <div class="h2 text-center mb-5">Ответы на часто задаваемые вопросы</div>
 
-  <div
-    class="col-lg-8 mx-auto pb-5"
-    id="accordion"
-  >
-    <h3 class="rounded-4 bg-primary p-4 text-light mb-4">Собираете ли вы подарочные боксы?</h3>
-    <div class="border-0">
-      <p>
-        Да, у нас есть такая услуга. Мы можем собрать подарочный бокс на любой вкус, объем и стоимость!
-      </p>
+  <div class="col-lg-8 mx-auto pb-5" id="accordion">
+
+    <!-- 0 -->
+    <h3 class="rounded-4 bg-primary p-4 text-light mb-4"
+        role="button"
+        (click)="toggleFaq(0)"
+        [attr.aria-expanded]="isOpen(0)">
+      Собираете ли вы подарочные боксы?
+      <svg class="faq-chevron" [class.open]="isOpen(0)" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+        <polyline points="8,4 16,12 8,20" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></polyline>
+      </svg>
+    </h3>
+    <div class="border-0 faq-body" [class.show]="isOpen(0)" id="faq-0">
+      <div class="faq-inner">
+        <p>Да, у нас есть такая услуга. Мы можем собрать подарочный бокс на любой вкус, объем и стоимость!</p>
+      </div>
     </div>
-    <h3 class="rounded-4 bg-primary p-4 text-light mb-4">Сколько у вас разновидностей чая?</h3>
-    <div class="border-0">
-      <p>
-        Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
-        purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
-        velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
-        suscipit faucibus urna.
-      </p>
+
+    <!-- 1 -->
+    <h3 class="rounded-4 bg-primary p-4 text-light mb-4"
+        role="button"
+        (click)="toggleFaq(1)"
+        [attr.aria-expanded]="isOpen(1)">
+      Сколько у вас разновидностей чая?
+      <svg class="faq-chevron" [class.open]="isOpen(1)" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+        <polyline points="8,4 16,12 8,20" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></polyline>
+      </svg>
+    </h3>
+    <div class="border-0 faq-body" [class.show]="isOpen(1)" id="faq-1">
+      <div class="faq-inner">
+        <p>
+          Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+          purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+          velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+          suscipit faucibus urna.
+        </p>
+      </div>
     </div>
-    <h3 class="rounded-4 bg-primary p-4 text-light mb-4">В какой срок осуществляется доставка?</h3>
-    <div class="border-0">
-      <p>
-        Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
-        Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
-        ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
-        lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
-      </p>
-      <ul>
-        <li>List item one</li>
-        <li>List item two</li>
-        <li>List item three</li>
-      </ul>
+
+    <!-- 2 -->
+    <h3 class="rounded-4 bg-primary p-4 text-light mb-4"
+        role="button"
+        (click)="toggleFaq(2)"
+        [attr.aria-expanded]="isOpen(2)">
+      В какой срок осуществляется доставка?
+      <svg class="faq-chevron" [class.open]="isOpen(2)" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+        <polyline points="8,4 16,12 8,20" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></polyline>
+      </svg>
+    </h3>
+    <div class="border-0 faq-body" [class.show]="isOpen(2)" id="faq-2">
+      <div class="faq-inner">
+        <p>
+          Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+          Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+          ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+          lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+        </p>
+        <ul>
+          <li>List item one</li>
+          <li>List item two</li>
+          <li>List item three</li>
+        </ul>
+      </div>
     </div>
-    <h3 class="rounded-4 bg-primary p-4 text-light mb-4">У вас обновляется ассортимент?</h3>
-    <div class="border-0">
-      <p>
-        Cras dictum. Pellentesque habitant morbi tristique senectus et netus
-        et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
-        faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
-        mauris vel est.
-      </p>
-      <p>
-        Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
-        Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-        inceptos himenaeos.
-      </p>
+
+    <!-- 3 -->
+    <h3 class="rounded-4 bg-primary p-4 text-light mb-4"
+        role="button"
+        (click)="toggleFaq(3)"
+        [attr.aria-expanded]="isOpen(3)">
+      У вас обновляется ассортимент?
+      <svg class="faq-chevron" [class.open]="isOpen(3)" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+        <polyline points="8,4 16,12 8,20" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></polyline>
+      </svg>
+    </h3>
+    <div class="border-0 faq-body" [class.show]="isOpen(3)" id="faq-3">
+      <div class="faq-inner">
+        <p>
+          Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+          et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+          faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+          mauris vel est.
+        </p>
+        <p>
+          Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+          Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+          inceptos himenaeos.
+        </p>
+      </div>
     </div>
-    <h3 class="rounded-4 bg-primary p-4 text-light">Какого объема у вас пачки чая?</h3>
-    <div class="border-0">
-      <p>
-        Cras dictum. Pellentesque habitant morbi tristique senectus et netus
-        et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
-        faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
-        mauris vel est.
-      </p>
-      <p>
-        Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
-        Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-        inceptos himenaeos.
-      </p>
+
+    <!-- 4 -->
+    <h3 class="rounded-4 bg-primary p-4 text-light"
+        role="button"
+        (click)="toggleFaq(4)"
+        [attr.aria-expanded]="isOpen(4)">
+      Какого объема у вас пачки чая?
+      <svg class="faq-chevron" [class.open]="isOpen(4)" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+        <polyline points="8,4 16,12 8,20" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></polyline>
+      </svg>
+    </h3>
+    <div class="border-0 faq-body" [class.show]="isOpen(4)" id="faq-4">
+      <div class="faq-inner">
+        <p>
+          Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+          et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+          faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+          mauris vel est.
+        </p>
+        <p>
+          Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+          Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+          inceptos himenaeos.
+        </p>
+      </div>
     </div>
+
   </div>
+
 
 </div>
 

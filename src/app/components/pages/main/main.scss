@@ -1,0 +1,154 @@
+.carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  display: block;
+}
+
+.carousel {
+  position: relative;
+  height: 640px;
+  margin-bottom: 100px;
+}
+
+.carousel-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+
+  &.active {
+    opacity: 1;
+    z-index: 1;
+  }
+}
+
+.carousel-image {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 3;
+
+  &.prev {
+    left: 15px;
+  }
+
+  &.next {
+    right: 15px;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.95);
+  }
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 3;
+}
+
+.carousel-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+
+  &.active {
+    background: white;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.8);
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel {
+    height: 400px;
+  }
+
+  .carousel-content {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .fs-2 {
+    font-size: 1.5rem !important;
+  }
+}
+
+#accordion h3 {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  cursor: pointer;
+}
+
+#accordion h3 .faq-chevron {
+  margin-left: auto;
+  color: #fff;
+  transition: transform .2s ease;
+  transform-origin: 50% 50%;
+  flex: 0 0 auto;
+}
+#accordion h3 .faq-chevron.open {
+  transform: rotate(90deg);
+}
+#accordion h3 { cursor: pointer; user-select: none; }
+
+#accordion .faq-body {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 550ms ease;
+}
+#accordion .faq-body .faq-inner {
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: padding 550ms ease;
+}
+#accordion .faq-body.show {
+  max-height: 1000px;
+}
+#accordion .faq-body.show .faq-inner {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+
