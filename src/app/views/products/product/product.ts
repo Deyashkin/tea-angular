@@ -1,14 +1,12 @@
 import {Component, inject, type OnInit, signal} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ProductService} from '../../../Services/product.service';
-import type {ProductType} from '../../../types/product.type';
 import {finalize} from 'rxjs';
+import type {ProductType} from '../../../../types/product.type';
+import {ProductService} from '../../../shared/services/product.service';
 
 @Component({
   selector: 'product',
-  standalone: true,
-  imports: [
-  ],
+  standalone: false,
   templateUrl: './product.html',
   styleUrl: './product.scss'
 })

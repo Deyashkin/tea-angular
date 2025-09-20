@@ -1,11 +1,9 @@
 import {Component, Input} from '@angular/core';
-import type {ProductType} from '../../../types/product.type';
-import {RouterLink} from '@angular/router';
+import type {ProductType} from '../../../../types/product.type';
 
 @Component({
   selector: 'product-card',
-  standalone: true,
-  imports: [RouterLink],
+  standalone: false,
   templateUrl: './product-card.html',
   styleUrl: './product-card.scss'
 })

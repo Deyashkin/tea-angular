@@ -1,8 +1,9 @@
 import { Routes } from '@angular/router';
-import {Main} from './components/pages/main/main';
-import {Shop} from './components/pages/shop/shop';
-import {Checkout} from './components/pages/checkout/checkout';
-import {Product} from './components/pages/product/product';
+import {Main} from './views/main/main/main';
+import {Shop} from './views/products/shop/shop';
+import {Product} from './views/products/product/product';
+import {Checkout} from './views/order/checkout/checkout';
+
 
 export const routes: Routes = [
   {path: '', component: Main},

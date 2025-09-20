@@ -1,12 +1,10 @@
 import {Component, signal} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {timer} from 'rxjs';
-import {RouterLink, RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'main-component',
-  standalone: true,
-  imports: [RouterLink],
+  standalone: false,
   templateUrl: './main.html',
   styleUrl: './main.scss'
 })
@@ -64,7 +62,7 @@ export class Main {
   startSlider() {
     this.intervalId = setInterval(() => {
       this.nextSlide();
-    }, 5000); // Смена слайда каждые 5 секунд
+    }, 5000);
   }
 
   nextSlide() {
@@ -87,11 +85,11 @@ export class Main {
 
   closePopup() { this.showPopup = false; }
 
-  openFaq = signal<number | null>(0);  // какой пункт открыт (по умолчанию 0) или null
+  openFaq = signal<number | null>(0);
 
   toggleFaq(i: number) {
     const cur = this.openFaq();
-    this.openFaq.set(cur === i ? null : i); // клик по открытому — закрываем
+    this.openFaq.set(cur === i ? null : i);
   }
 
   isOpen(i: number) {

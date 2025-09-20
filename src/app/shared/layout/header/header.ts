@@ -1,13 +1,8 @@
 import { Component } from '@angular/core';
-import {RouterLink, RouterLinkActive} from '@angular/router';
 
 @Component({
   selector: 'header-component',
-  standalone: true,
-  imports: [
-    RouterLink,
-    RouterLinkActive
-  ],
+  standalone: false,
   templateUrl: './header.html',
   styleUrl: './header.scss'
 })

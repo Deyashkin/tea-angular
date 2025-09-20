@@ -1,17 +1,14 @@
 import {Component, type OnInit, signal} from '@angular/core';
-import {ProductCardComponent} from '../../common/product-card/product-card';
-import type {ProductType} from '../../../types/product.type';
 import { HttpClient } from '@angular/common/http';
+import type {ProductType} from '../../../../types/product.type';
 
 @Component({
   selector: 'shop-component',
-  standalone: true,
-  imports: [
-    ProductCardComponent
-  ],
+  standalone: false,
   templateUrl: './shop.html',
   styleUrl: './shop.scss'
 })
+
 export class Shop implements OnInit {
 
   protected readonly title = signal('tea-angular');

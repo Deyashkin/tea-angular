@@ -1,11 +1,10 @@
 import {Component, inject, type OnInit} from '@angular/core';
-import {ActivatedRoute, Router, RouterLink} from '@angular/router';
-import type { ProductType } from '../../../types/product.type';
+import {ActivatedRoute, Router,} from '@angular/router';
+import type { ProductType } from '../../../../types/product.type';
 import {
   AbstractControl,
   FormBuilder,
-  FormsModule,
-  ReactiveFormsModule, type ValidationErrors, Validators
+  type ValidationErrors, Validators
 } from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 
@@ -21,8 +20,7 @@ function phoneValidator(ctrl: AbstractControl): ValidationErrors | null {
 
 @Component({
   selector: 'checkout-component',
-  standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, RouterLink],
+  standalone: false,
   templateUrl: './checkout.html',
   styleUrl: './checkout.scss'
 })
